@@ -31,7 +31,11 @@ class case_no_file(object):
         return not os.path.exists(handler.full_path)
     
     def act(self, handler):
-        raise ServerException("'{0}' Not found".format('404'))
+        if handler.full_path.endswith('html'):
+           raise ServerException("'{0}' Not found".format('404'))
+        else:
+            content=handler.full_path.split('/')
+            raise ServerException("Hello {0} ".format(content[len(content)-1]))
 
 #------------------------------------------------------------------------------------
 
@@ -135,7 +139,7 @@ def app(environ, start_response):
 #----------------------------------------------------------------------
 
 if __name__ == '__main__':
-    module='server'
+    module='webserver'
     application = 'app'
     module = __import__(module)
     application = getattr(module, application)
