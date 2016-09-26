@@ -129,7 +129,7 @@ def app(environ, start_response):
         This is a starting point for you own Web Framework :)
         """
     status = '200 OK'
-    response_headers = [('Content-Type', 'text/plain')]
+    response_headers = [('Content-Type', 'text/html')]
     start_response(status, response_headers)
     return ['Hello ',environ['PATH_INFO'][1:]]
 
@@ -141,6 +141,6 @@ if __name__ == '__main__':
     module = __import__(module)
     application = getattr(module, application)
     
-    serverAddress = ('', 8080)
+    serverAddress = ('', 8888)
     server = BaseHTTPServer.HTTPServer(serverAddress, RequestHandler)
     server.serve_forever()
